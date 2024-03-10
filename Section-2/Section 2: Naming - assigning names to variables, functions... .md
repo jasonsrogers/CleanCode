@@ -526,3 +526,122 @@ Then we can call it like this:
 ```python
 blog_post.print()
 ```
+
+## your challenge
+
+```python
+class Point:
+    def __init__(self, coordX, coordY):
+        self.coordX = coordX
+        self.coordY = coordY
+
+
+class Rectangle:
+    def __init__(self, starting_point, broad, high):
+        self.starting_point = starting_point
+        self.broad = broad
+        self.high = high
+
+    def area(self):
+        return self.broad * self.high
+
+    def end_points(self):
+        top_right = self.starting_point.coordX + self.broad
+        bottom_left = self.starting_point.coordY + self.high
+        print('Starting Point (X)): ' + str(self.starting_point.coordX))
+        print('Starting Point (Y)): ' + str(self.starting_point.coordY))
+        print('End Point X-Axis (Top Right): ' + str(top_right))
+        print('End Point Y-Axis (Bottom Left): ' + str(bottom_left))
+
+
+def build_stuff():
+    main_point = Point(50, 100)
+    rect = Rectangle(main_point, 90, 10)
+
+    return rect
+
+
+my_rect = build_stuff()
+
+print(my_rect.area())
+my_rect.end_points()
+```
+
+`class Point:`
+`class Rectangle:`
+
+Those are good names, we could be more specific with `Point` but it's not necessary.
+
+```python
+def __init__(self, coordX, coordY):
+    self.coordX = coordX
+    self.coordY = coordY
+```
+
+`coordX` and `coordY` are ok and could be left as is, but they are not great as they are a bit redundant.
+
+In the context of point, `x` and `y` are enough as it's clear that they are coordinates.
+
+So in this case, shorter names are better.
+
+```python
+ def __init__(self, starting_point, broad, high):
+    self.starting_point = starting_point
+    self.broad = broad
+    self.high = high
+```
+
+The constructor of the `Rectangle`, the variable names are not great.
+
+`starting_point` is ok, it's coordinates where to start the rectangle, a possible improvement could be `origin`
+
+`broad` and `high` are not good, they are slang and unclear when there is more common words to describe a rectangle's dimensions: `width` and `height`
+
+```python
+def area(self):
+    return self.broad * self.high
+```
+
+Is a method and therefore should have a name that describes an action performed by the method. This sounds like a property, which would be fine if a boolean was returned or if it was a getter. Instead let's call it `get_area`
+
+```python
+def end_points(self):
+    top_right = self.starting_point.coordX + self.broad
+    bottom_left = self.starting_point.coordY + self.high
+    print('Starting Point (X)): ' + str(self.starting_point.coordX))
+    print('Starting Point (Y)): ' + str(self.starting_point.coordY))
+    print('End Point X-Axis (Top Right): ' + str(top_right))
+    print('End Point Y-Axis (Bottom Left): ' + str(bottom_left))
+```
+
+This is printing the end points of the rectangle. 
+The variables `top_right` and `bottom_left` are good enough, we could find alternatives but they are clear enough.
+
+`end_points` we are not just printing the end points, we are also printing the starting point, so let's call it `print_coordinates`
+
+```python
+def build_stuff():
+    main_point = Point(50, 100)
+    rect = Rectangle(main_point, 90, 10)
+
+    return rect
+```
+
+This is slang and unclear, `build_stuff` is not descriptive at all and we have to look into the function to understand what it does.
+
+`build_rectangle` would be a better name.
+
+`main_point` is not a good name, it's the origin of the rectangle, so let's call it `rectangle_origin`
+
+`rect` is an unclear abbreviation, `rectangle` is better.
+
+```python
+my_rect = build_stuff()
+
+print(my_rect.area())
+my_rect.end_points()
+```
+
+`my_rect` is just bad, `my` is it the developers rectangle? the users? the applications? It's unclear.
+
+`rectangle` is better.
